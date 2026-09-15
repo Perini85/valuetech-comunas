@@ -6,36 +6,38 @@
     <title>@ViewData["Title"] - Valuetech</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/Valuetech.WebMvc.styles.css" asp-append-version="true" />
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Regiones" asp-action="Index">Valuetech · Comunas</a>
+        <nav class="navbar navbar-expand-sm app-navbar">
+            <div class="container-xl">
+                <a class="navbar-brand app-brand" asp-area="" asp-controller="Regiones" asp-action="Index">
+                    <span class="brand-mark" aria-hidden="true">V</span>
+                    <span>Valuetech <span class="brand-divider">·</span> Comunas</span>
+                </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+                        aria-expanded="false" aria-label="Alternar navegación">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+                <div class="navbar-collapse collapse">
+                    <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Regiones" asp-action="Index">Regiones</a>
+                            <a class="nav-link app-nav-link" asp-area="" asp-controller="Regiones" asp-action="Index" aria-current="page">
+                                <span class="nav-dot" aria-hidden="true"></span> Regiones
+                            </a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            Valuetech · Gestión de regiones y comunas
+    <main role="main" class="container-xl app-main">
+        @RenderBody()
+    </main>
+    <footer class="app-footer">
+        <div class="container-xl d-flex justify-content-between align-items-center gap-3">
+            <span>Valuetech · Gestión territorial</span>
+            <span class="footer-status"><span class="status-dot" aria-hidden="true"></span> Servicio conectado</span>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
