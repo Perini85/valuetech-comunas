@@ -1,5 +1,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Valuetech.Application.Abstractions.Persistence;
+using Valuetech.Infrastructure.Persistence.Repositories;
 using Valuetech.Infrastructure.Persistence.SqlServer;
 
 namespace Valuetech.Infrastructure;
@@ -15,7 +17,12 @@ public static class DependencyInjection
             ?? throw new InvalidOperationException(
                 $"No se configuró la cadena de conexión '{SqlConnectionFactory.ConnectionStringName}'.");
 
-        services.AddSingleton(new SqlConnectionFactory(connectionString));
+        services.AddSingleton(
+            new SqlConnectionFactory(connectionString));
+
+        services.AddScoped<
+            IRegionRepository,
+            RegionRepository>();
 
         return services;
     }
