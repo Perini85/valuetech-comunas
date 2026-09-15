@@ -1,6 +1,0 @@
-@Valuetech.Api_HostAddress = http://localhost:5198
-
-GET {{Valuetech.Api_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
