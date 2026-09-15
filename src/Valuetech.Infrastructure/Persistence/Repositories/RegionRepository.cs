@@ -40,4 +40,28 @@ internal sealed class RegionRepository(
 
         public string Nombre { get; set; } = string.Empty;
     }
+
+    public async Task<Region?> ObtenerPorIdAsync(
+        int id,
+        CancellationToken cancellationToken)
+    {
+        await using var connection =
+            connectionFactory.CreateConnection();
+
+        var command = new CommandDefinition(
+            commandText: "dbo.Regiones_ObtenerPorId",
+            parameters: new
+            {
+                IdRegion = id
+            },
+            commandType: CommandType.StoredProcedure,
+            cancellationToken: cancellationToken);
+
+        var row = await connection.QuerySingleOrDefaultAsync<RegionRow>(
+            command);
+
+        return row is null
+            ? null
+            : Region.Rehidratar(row.Id, row.Nombre);
+    }
 }

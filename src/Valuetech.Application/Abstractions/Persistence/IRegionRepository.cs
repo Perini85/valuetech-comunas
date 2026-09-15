@@ -6,4 +6,8 @@ public interface IRegionRepository
 {
     Task<IReadOnlyCollection<Region>> ListarAsync(
         CancellationToken cancellationToken);
+
+    Task<Region?> ObtenerPorIdAsync(
+        int id,
+        CancellationToken cancellationToken);
 }

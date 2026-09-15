@@ -24,6 +24,7 @@ public static class DependencyInjection
             IRegionRepository,
             RegionRepository>();
 
+        services.AddScoped<IComunaRepository, ComunaRepository>();
         return services;
     }
 }

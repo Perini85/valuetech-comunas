@@ -1,0 +1,36 @@
+@model ComunasIndexModel
+@using System.Globalization
+@{ ViewData["Title"] = Model.Region.Nombre; var culture = CultureInfo.GetCultureInfo("es-CL"); }
+<a asp-controller="Regiones" asp-action="Index" class="text-decoration-none">&larr; Todas las regiones</a>
+<h1 class="mt-3">@Model.Region.Nombre</h1>
+<p class="text-muted">@Model.Comunas.Count comunas registradas</p>
+@if (TempData["Success"] is string message)
+{
+    <div class="alert alert-success" role="status">@message</div>
+}
+@if (Model.Comunas.Count == 0)
+{
+    <div class="alert alert-info">Esta región todavía no tiene comunas registradas.</div>
+}
+else
+{
+    <div class="table-responsive border rounded bg-white">
+        <table class="table table-hover align-middle mb-0">
+            <caption class="px-3">Superficie en km² y densidad en habitantes por km². — indica datos sin registrar.</caption>
+            <thead class="table-light"><tr><th scope="col">Comuna</th><th scope="col" class="text-end">Superficie</th><th scope="col" class="text-end">Población</th><th scope="col" class="text-end">Densidad</th><th scope="col">Acciones</th></tr></thead>
+            <tbody>
+            @foreach (var comuna in Model.Comunas)
+            {
+                <tr>
+                    <th scope="row">@comuna.Nombre</th>
+                    <td class="text-end">@(comuna.InformacionAdicional?.Superficie.ToString("N2", culture) ?? "—")</td>
+                    <td class="text-end">@(comuna.InformacionAdicional?.Poblacion.ToString("N0", culture) ?? "—")</td>
+                    <td class="text-end">@(comuna.InformacionAdicional?.Densidad.ToString("N2", culture) ?? "—")</td>
+                    <td><a class="btn btn-sm btn-outline-primary" asp-action="Editar" asp-route-regionId="@Model.Region.Id"
+                           asp-route-id="@comuna.Id" aria-label="Editar @comuna.Nombre">Editar</a></td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+}

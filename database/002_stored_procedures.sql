@@ -61,7 +61,8 @@ BEGIN
     SELECT
         IdComuna AS Id,
         IdRegion AS RegionId,
-        Nombre
+        Nombre,
+        CONVERT(NVARCHAR(MAX), InformacionAdicional) AS InformacionAdicional
     FROM dbo.Comunas
     WHERE IdRegion = @IdRegion
     ORDER BY Nombre;
@@ -86,7 +87,8 @@ BEGIN
     SELECT
         IdComuna AS Id,
         IdRegion AS RegionId,
-        Nombre
+        Nombre,
+        CONVERT(NVARCHAR(MAX), InformacionAdicional) AS InformacionAdicional
     FROM dbo.Comunas
     WHERE IdRegion = @IdRegion
       AND IdComuna = @IdComuna;
@@ -104,7 +106,8 @@ GO
 CREATE PROCEDURE dbo.Comunas_Actualizar
     @IdRegion INT,
     @IdComuna INT,
-    @Nombre NVARCHAR(100)
+    @Nombre NVARCHAR(100),
+    @InformacionAdicional XML = NULL
 AS
 BEGIN
     SET NOCOUNT ON;
@@ -127,15 +130,18 @@ BEGIN
         SELECT
             @IdComuna AS IdComuna,
             @IdRegion AS IdRegion,
-            @Nombre AS Nombre
+            @Nombre AS Nombre,
+            @InformacionAdicional AS InformacionAdicional
     ) AS Origen
         ON Destino.IdComuna = Origen.IdComuna
        AND Destino.IdRegion = Origen.IdRegion
     WHEN MATCHED THEN
-        UPDATE SET Nombre = Origen.Nombre
+        UPDATE SET Nombre = Origen.Nombre,
+            InformacionAdicional = Origen.InformacionAdicional
     OUTPUT
         inserted.IdComuna AS Id,
         inserted.IdRegion AS RegionId,
-        inserted.Nombre;
+        inserted.Nombre,
+        CONVERT(NVARCHAR(MAX), inserted.InformacionAdicional) AS InformacionAdicional;
 END;
 GO

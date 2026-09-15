@@ -23,6 +23,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\Valuetech.Domain\Valuetech.Domain.csproj" />
     <ProjectReference Include="..\..\src\Valuetech.Application\Valuetech.Application.csproj" />
+    <ProjectReference Include="..\..\src\Valuetech.WebMvc\Valuetech.WebMvc.csproj" />
   </ItemGroup>
 
 </Project>

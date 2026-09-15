@@ -20,3 +20,10 @@ html {
 body {
   margin-bottom: 60px;
 }
+body { background: #f5f7fb; color: #17263c; }
+.navbar-brand { font-weight: 650; }
+.card { border-color: #e2e8f0; border-radius: 12px; }
+.edit-form { max-width: 850px; }
+.table th, .table td { padding: 1rem; }
+.btn-primary { background-color: #2259a7; border-color: #2259a7; }
+footer { background: white; }

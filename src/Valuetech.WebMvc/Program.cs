@@ -1,15 +1,30 @@
+using Microsoft.AspNetCore.Localization;
+using Valuetech.WebMvc.Filters;
+using Valuetech.WebMvc.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews(options => options.Filters.Add<ApiExceptionFilter>());
+builder.Services.AddHttpClient<ValuetechApiClient>(client =>
+{
+    client.BaseAddress = new Uri(builder.Configuration["Api:BaseUrl"]
+        ?? throw new InvalidOperationException("Configura Api:BaseUrl."));
+    client.Timeout = TimeSpan.FromSeconds(15);
+});
 
 var app = builder.Build();
+// Los inputs HTML de tipo number envían decimales con punto.
+app.UseRequestLocalization(new RequestLocalizationOptions
+{
+    DefaultRequestCulture = new RequestCulture("en-US", "es-CL"),
+    SupportedCultures = [new System.Globalization.CultureInfo("en-US")],
+    SupportedUICultures = [new System.Globalization.CultureInfo("es-CL")],
+    RequestCultureProviders = []
+});
 
-// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
@@ -22,6 +37,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Regiones}/{action=Index}/{id?}");
 
 app.Run();

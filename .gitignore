@@ -54,13 +54,36 @@ logs/
 .env.*
 !.env.example
 appsettings.Local.json
+appsettings.local.json
+appsettings.*.[Ll]ocal.json
+*.publishsettings
+*.pfx
+*.p12
+*.key
+*.snk
+
+# Temporary files and local backups
+.cache/
+.history/
+*.tmp
+*.temp
+*.bak
+*.orig
+*.rej
+*.swp
+*.swo
+*~
 
 # Local SQL Server files
 *.mdf
 *.ldf
+*.ndf
+*.bacpac
+*.trn
 
 # Assessment source documents and personal files
 *.docx
+.~lock.*#
 *.pdf
 
 # Operating system files

@@ -50,3 +50,9 @@ BEGIN
     );
 END;
 GO
+
+IF COL_LENGTH(N'dbo.Comunas', N'InformacionAdicional') IS NULL
+BEGIN
+    ALTER TABLE dbo.Comunas ADD InformacionAdicional XML NULL;
+END;
+GO
