@@ -2,6 +2,11 @@
 **/bin/
 **/obj/
 artifacts/
+**/publish/
+**/out/
+packages/
+*.nupkg
+*.snupkg
 
 # IDE and user-specific files
 .vs/
@@ -14,6 +19,10 @@ artifacts/
 !.vscode/extensions.json
 !.vscode/launch.json
 !.vscode/tasks.json
+*.rsuser
+*.userprefs
+*.DotSettings.user
+_ReSharper*/
 
 # Test and coverage output
 TestResults/
@@ -21,6 +30,22 @@ coverage/
 *.trx
 *.coverage
 *.coveragexml
+
+# Front-end dependencies
+**/node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Keep only the browser assets referenced by the Razor views
+**/wwwroot/lib/**/*.map
+**/wwwroot/lib/**/*.css
+!**/wwwroot/lib/bootstrap/dist/css/bootstrap.min.css
+**/wwwroot/lib/**/*.js
+!**/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js
+!**/wwwroot/lib/jquery/dist/jquery.min.js
+!**/wwwroot/lib/jquery-validation/dist/jquery.validate.min.js
+!**/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js
 
 # Logs and local configuration
 logs/
@@ -41,4 +66,3 @@ appsettings.Local.json
 # Operating system files
 .DS_Store
 Thumbs.db
-

@@ -1,0 +1,57 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Valuetech.Api (HTTP)",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build-api",
+      "program": "${workspaceFolder}/src/Valuetech.Api/bin/Debug/net8.0/Valuetech.Api.dll",
+      "args": [],
+      "cwd": "${workspaceFolder}/src/Valuetech.Api",
+      "stopAtEntry": false,
+      "justMyCode": true,
+      "console": "integratedTerminal",
+      "serverReadyAction": {
+        "action": "openExternally",
+        "pattern": "\\bNow listening on:\\s+(https?://\\S+)",
+        "uriFormat": "%s/swagger"
+      },
+      "env": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ASPNETCORE_URLS": "http://localhost:5198"
+      }
+    },
+    {
+      "name": "Valuetech.WebMvc (HTTP)",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build-webmvc",
+      "program": "${workspaceFolder}/src/Valuetech.WebMvc/bin/Debug/net8.0/Valuetech.WebMvc.dll",
+      "args": [],
+      "cwd": "${workspaceFolder}/src/Valuetech.WebMvc",
+      "stopAtEntry": false,
+      "justMyCode": true,
+      "console": "integratedTerminal",
+      "serverReadyAction": {
+        "action": "openExternally",
+        "pattern": "\\bNow listening on:\\s+(https?://\\S+)",
+        "uriFormat": "%s"
+      },
+      "env": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ASPNETCORE_URLS": "http://localhost:5098"
+      }
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Valuetech: API + Web MVC",
+      "configurations": [
+        "Valuetech.Api (HTTP)",
+        "Valuetech.WebMvc (HTTP)"
+      ],
+      "stopAll": true
+    }
+  ]
+}

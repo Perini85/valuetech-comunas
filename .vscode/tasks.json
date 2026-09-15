@@ -1,0 +1,93 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "restore-api",
+      "type": "process",
+      "command": "dotnet",
+      "args": [
+        "restore",
+        "${workspaceFolder}/src/Valuetech.Api/Valuetech.Api.csproj",
+        "--configfile",
+        "${workspaceFolder}/nuget.config"
+      ],
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "build-api",
+      "type": "process",
+      "command": "dotnet",
+      "args": [
+        "build",
+        "${workspaceFolder}/src/Valuetech.Api/Valuetech.Api.csproj",
+        "--configuration",
+        "Debug",
+        "--no-restore",
+        "/property:GenerateFullPaths=true",
+        "/consoleloggerparameters:NoSummary"
+      ],
+      "problemMatcher": "$msCompile",
+      "dependsOn": "restore-api",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "restore-webmvc",
+      "type": "process",
+      "command": "dotnet",
+      "args": [
+        "restore",
+        "${workspaceFolder}/src/Valuetech.WebMvc/Valuetech.WebMvc.csproj",
+        "--configfile",
+        "${workspaceFolder}/nuget.config"
+      ],
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "build-webmvc",
+      "type": "process",
+      "command": "dotnet",
+      "args": [
+        "build",
+        "${workspaceFolder}/src/Valuetech.WebMvc/Valuetech.WebMvc.csproj",
+        "--configuration",
+        "Debug",
+        "--no-restore",
+        "/property:GenerateFullPaths=true",
+        "/consoleloggerparameters:NoSummary"
+      ],
+      "problemMatcher": "$msCompile",
+      "dependsOn": "restore-webmvc"
+    },
+    {
+      "label": "restore-solution",
+      "type": "process",
+      "command": "dotnet",
+      "args": [
+        "restore",
+        "${workspaceFolder}/Valuetech.Comunas.sln",
+        "--configfile",
+        "${workspaceFolder}/nuget.config"
+      ],
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "build-solution",
+      "type": "process",
+      "command": "dotnet",
+      "args": [
+        "build",
+        "${workspaceFolder}/Valuetech.Comunas.sln",
+        "--configuration",
+        "Debug",
+        "--no-restore",
+        "/property:GenerateFullPaths=true",
+        "/consoleloggerparameters:NoSummary"
+      ],
+      "problemMatcher": "$msCompile",
+      "dependsOn": "restore-solution"
+    }
+  ]
+}
